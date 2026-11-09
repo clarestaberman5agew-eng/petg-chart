@@ -1,0 +1,1477 @@
+version: 2.1
+
+jobs:
+  GLYPH_NODE:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Compose fixture D
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; ls -l /dev | grep 'random' | head -n4; true ; } > /tmp/area-5/ambermatr1x
+            echo "gate APP-808: $(wc -c </tmp/area-5/ambermatr1x) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'ambermatr1x'
+  APP-808:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/ambermatr1x
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore vendored sources
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  PUBLIC_DIR:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Skin the fog volumes since rollout
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; touch "/tmp/app-swan.tmp"&&ls -i "/tmp/app-swan.tmp"; true ; } > /tmp/area-5/223.161.239.217
+            echo "gate romeo-3: $(wc -c </tmp/area-5/223.161.239.217) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - '223.161.239.217'
+  romeo-3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/223.161.239.217
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  DateIndexPattern:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Revert checksum
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; str='name: demo'; echo "$str" | grep -o . | sort | uniq -c | sort -rn | head -n 3; true ; } > /tmp/area-5/40f98201114b158c5c5e40fd2ad39d30ab82
+            echo "gate p-old: $(wc -c </tmp/area-5/40f98201114b158c5c5e40fd2ad39d30ab82) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - '40f98201114b158c5c5e40fd2ad39d30ab82'
+  p-old:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/IMG50468
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  ns_prnt:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Move the sudoers file to prod
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; printf 'orange\t12\npantry\t2\nreport\t88\nleft\t13\n' | awk -F'\t' '{print $2}'; true ; } > /tmp/area-5/exp2_abb0
+            echo "gate WEB-271: $(wc -c </tmp/area-5/exp2_abb0) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'exp2_abb0'
+  WEB-271:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/IMG50468
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack toolkit
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  l909:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Performance Review Update Routine
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; printf '%s\n' "phase one complete" "fully charged" | tac | tr -d '[:digit:]'; true ; } > /tmp/area-5/ADMiNReEfNOde
+            echo "gate nebula-beta: $(wc -c </tmp/area-5/ADMiNReEfNOde) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'ADMiNReEfNOde'
+  nebula-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/ambermatr1x
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  StrongUnboundedLockQuery:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Month end good to go
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; sort </etc/shells >"/var/tmp/o301.conf" && head -n 3 "/var/tmp/o301.conf"; true ; } > /tmp/area-5/fnv_6289c0dc0785a01
+            echo "gate bug-3900: $(wc -c </tmp/area-5/fnv_6289c0dc0785a01) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'fnv_6289c0dc0785a01'
+  bug-3900:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/ambermatr1x
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  DBFactory:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Maintenance mode is quiet
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; cut -c1-11 /etc/profile | sort -u | fold -w 35; true ; } > /tmp/area-5/BRAMBLE_CRIMSON
+            echo "gate java17-build: $(wc -c </tmp/area-5/BRAMBLE_CRIMSON) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'BRAMBLE_CRIMSON'
+  java17-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/BRAMBLE_CRIMSON
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore build cache
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  choose-unless:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Wait 45 seconds
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; cut -d: -f4 /etc/group | xargs; true ; } > /tmp/area-5/PO_097760
+            echo "gate auh-check-36: $(wc -c </tmp/area-5/PO_097760) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'PO_097760'
+  auh-check-36:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/IMG50468
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull reference data
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  CATEGORY_DYNAMIC:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Step Five Test The BIOS Settings
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; echo 'first line'|awk '{gsub(/[aeiou]/, ""); print}'; true ; } > /tmp/area-5/draft527
+            echo "gate q1-ship: $(wc -c </tmp/area-5/draft527) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'draft527'
+  q1-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/draft527
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Stage inputs
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  take-when:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: High five the health endpoint
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; ls -d /usr/share/*/ | sort -r | sed 's|.*/||'; true ; } > /tmp/area-5/v0.5.10
+            echo "gate py310-cov: $(wc -c </tmp/area-5/v0.5.10) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'v0.5.10'
+  py310-cov:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/IMG50468
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack bundle
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  trolley-6x:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: TRAIN CHECKPOINTS MANUAL
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; echo ready >"/tmp/bottommap.csv" && cp "/tmp/bottommap.csv" "/tmp/region.old" && diff "/tmp/bottommap.csv" "/tmp/region.old" && echo identical; true ; } > /tmp/area-5/spriteBundleScarlet
+            echo "gate VERIFY_LAB: $(wc -c </tmp/area-5/spriteBundleScarlet) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'spriteBundleScarlet'
+  VERIFY_LAB:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/spriteBundleScarlet
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Rehydrate tree
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  ipIPArticle:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Warm VPN rev 7
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; echo hi >'/tmp/evening.notes.record-tmp.md' && stat -c '%s bytes, modified %y' '/tmp/evening.notes.record-tmp.md'; true ; } > /tmp/area-5/oSXIL0
+            echo "gate europa-alpha: $(wc -c </tmp/area-5/oSXIL0) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'oSXIL0'
+  europa-alpha:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/oSXIL0
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  d9-d0-8e-a5-59-40:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Compose fixture D
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; cut -d"=" -f1 /etc/os-release | grep -v '^[a-m]' | sort | uniq -c | sort -nr | expand -t 8; true ; } > /tmp/area-5/build_40410
+            echo "gate INIT_UAT: $(wc -c </tmp/area-5/build_40410) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'build_40410'
+  INIT_UAT:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/ambermatr1x
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  beginingNav:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Expire
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; echo 'it works' | sort -u | rev | fmt -w 49; true ; } > /tmp/area-5/PO_055132
+            echo "gate deploy: $(wc -c </tmp/area-5/PO_055132) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'PO_055132'
+  deploy:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/ambermatr1x
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Prime workspace
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  Papa:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: assignTravelClaimsJob
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; find /usr/sbin -maxdepth 3 -name "*fs*" -mmin +60 -user $(id -un) | cat -n; true ; } > /tmp/area-5/access-080bc.log
+            echo "gate validate-partial-test-matrix: $(wc -c </tmp/area-5/access-080bc.log) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'access-080bc.log'
+  validate-partial-test-matrix:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/IMG50468
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack payload
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  IsNO:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: SPOT CHECK TEST DATABASE END
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; printf '%s\n' "keep going" >&2; true ; } > /tmp/area-5/PXL40069
+            echo "gate chore-7637: $(wc -c </tmp/area-5/PXL40069) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'PXL40069'
+  chore-7637:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/PXL40069
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore snapshot
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  mt_Hant_PL:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: COMMIT 7ED60 INSPECTION
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; echo 'happy birthday' >"/tmp/contact.bak" && cp "/tmp/contact.bak" "/tmp/golden.txt" && diff "/tmp/contact.bak" "/tmp/golden.txt" && echo identical; true ; } > /tmp/area-5/scarlet260
+            echo "gate xi-run: $(wc -c </tmp/area-5/scarlet260) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'scarlet260'
+  xi-run:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/ambermatr1x
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  TMP_TMP:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Round ten
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; printf 'host=cache-a\nport=2720\nuser=grace\ndebug=true\n' >"${TMPDIR:-/tmp}/proposaljob.dat" && grep ^port "${TMPDIR:-/tmp}/proposaljob.dat" | cut -d= -f2; true ; } > /tmp/area-5/AXJudtsGhzu
+            echo "gate Deploy_Service3: $(wc -c </tmp/area-5/AXJudtsGhzu) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'AXJudtsGhzu'
+  Deploy_Service3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/IMG50468
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  l-progress:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: STG1 RENDER WAVEFORM
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; ls -A /var/lib |cat -n; true ; } > /tmp/area-5/2024-10-12T02-31
+            echo "gate fix-metrics: $(wc -c </tmp/area-5/2024-10-12T02-31) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - '2024-10-12T02-31'
+  fix-metrics:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/2024-10-12T02-31
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Seed workspace
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  setProfileIRQ:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Recording From Denver
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; COUNT='cleanup done' && printf '%s\n' "${#COUNT}"; true ; } > /tmp/area-5/DSC-1091
+            echo "gate bun-cov: $(wc -c </tmp/area-5/DSC-1091) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'DSC-1091'
+  bun-cov:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/IMG50468
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack sources
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  team-papa:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: TODO ask Lucia about the api tier
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; cp /etc/hosts /dev/shm/step.conf && sed -i.orig '1i # managed by hand' /dev/shm/step.conf && grep -c . /dev/shm/step.conf; true ; } > /tmp/area-5/23ed6281f
+            echo "gate QA_MERGE_1: $(wc -c </tmp/area-5/23ed6281f) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - '23ed6281f'
+  QA_MERGE_1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/ambermatr1x
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore vendored sources
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  while_val:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: The map view is live
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; sha224sum /etc/profile | awk '{print $1}'; true ; } > /tmp/area-5/INV30290
+            echo "gate ci-v2: $(wc -c </tmp/area-5/INV30290) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'INV30290'
+  ci-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/INV30290
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  q-protocol:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Fold in the world chunks
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; grep -r -h alias /etc/default 2> /dev/null|tail -5; true ; } > /tmp/area-5/DSC-00007792
+            echo "gate q2-rev: $(wc -c </tmp/area-5/DSC-00007792) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'DSC-00007792'
+  q2-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/DSC-00007792
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  derp:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Caramelize the staging cluster
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; seq 17 | head -n4; true ; } > /tmp/area-5/IMG50468
+            echo "gate bravo-8: $(wc -c </tmp/area-5/IMG50468) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'IMG50468'
+  bravo-8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/IMG50468
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack toolkit
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  assert_edge_join:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Compose fixture D
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; ls -d /usr/bin/z* | xargs -n1 dirname | awk -F/ '{print $NF}'; true ; } > /tmp/area-5/FROZEN_VECTOR_GLYPH
+            echo "gate Deploy_Tests4: $(wc -c </tmp/area-5/FROZEN_VECTOR_GLYPH) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'FROZEN_VECTOR_GLYPH'
+  Deploy_Tests4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/FROZEN_VECTOR_GLYPH
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  xref_CartMeasure1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: dr site promotion gate
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; ls -c --si /usr/bin/g* /var/cache|pr -3 -t; true ; } > /tmp/area-5/h0110w_7heta_me4d0w_rec3ipt
+            echo "gate py310-ship: $(wc -c </tmp/area-5/h0110w_7heta_me4d0w_rec3ipt) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'h0110w_7heta_me4d0w_rec3ipt'
+  py310-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/ambermatr1x
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  storeedge-glibc:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Double tap in legacy
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; find /var/log -executable -exec ls -ld "{}" ";" 2>/dev/null|nl; true ; } > /tmp/area-5/72a5f509801203dbe7286bf29007fce5d7878c8
+            echo "gate java17-vet: $(wc -c </tmp/area-5/72a5f509801203dbe7286bf29007fce5d7878c8) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - '72a5f509801203dbe7286bf29007fce5d7878c8'
+  java17-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/72a5f509801203dbe7286bf29007fce5d7878c8
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore build cache
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  refactor-zack-thread:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Wait for the search box to vanish
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; grep -qs 'sh$' /etc/passwd && echo 'Y' || echo N; true ; } > /tmp/area-5/37d3a1b6-dd0a-f1c5-1ef5
+            echo "gate succes-only: $(wc -c </tmp/area-5/37d3a1b6-dd0a-f1c5-1ef5) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - '37d3a1b6-dd0a-f1c5-1ef5'
+  succes-only:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/ambermatr1x
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull reference data
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  v20:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: 5 min to go collect the offer letters
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; printf '%-6s%-6s%s\n' contract silver split; true ; } > /tmp/area-5/rev-7098
+            echo "gate tweak-retry: $(wc -c </tmp/area-5/rev-7098) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'rev-7098'
+  tweak-retry:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/rev-7098
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Stage inputs
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+  SD-HOLD-SW:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: For round two review the runbook
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; gzip -9c /etc/os-release >"/tmp/rank1.gz" && gzip -l "/tmp/rank1.gz"; true ; } > /tmp/area-5/amberWillowLeptonSlice
+            echo "gate q2-smoke: $(wc -c </tmp/area-5/amberWillowLeptonSlice) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'amberWillowLeptonSlice'
+  q2-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Boot upstream reader
+          command: |
+            cat /tmp/area-5/ambermatr1x
+      - run:
+          name: Get sources
+          command: git clone --depth 2 -q --no-single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack bundle
+          command: cat build-deps-dev.tar | tar xf -
+      - run:
+          command: "$PWD/pause-handler"
+
+  current_imports:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: PEEK weekly rollup
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; grep -r --include="*.sh" umask /etc/skel | wc -l; true ; } > /tmp/area-5/223.161.239.217
+            echo "gate romeo-3: $(wc -c </tmp/area-5/223.161.239.217) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - '223.161.239.217'
+  mikeSage:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Strain the chargebacks
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; grep -R umask /usr/share/doc/bash | wc -l; true ; } > /tmp/area-5/2024-10-12T02-31
+            echo "gate fix-metrics: $(wc -c </tmp/area-5/2024-10-12T02-31) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - '2024-10-12T02-31'
+  vompspuellkeesi:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Wipe Or Sync The Upload Folder
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; tr -d '[:digit:]' < /etc/profile | rev | expand -t 4; true ; } > /tmp/area-5/oSXIL0
+            echo "gate europa-alpha: $(wc -c </tmp/area-5/oSXIL0) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'oSXIL0'
+  TEXTURE_2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Compose fixture D
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; getent passwd | cut --delimiter=: --fields=3; true ; } > /tmp/area-5/FROZEN_VECTOR_GLYPH
+            echo "gate Deploy_Tests4: $(wc -c </tmp/area-5/FROZEN_VECTOR_GLYPH) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'FROZEN_VECTOR_GLYPH'
+  gf:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Refund Year End Pack TOOLS 9040
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; getent passwd|tail -6|awk -F: '{ print $3 }'; true ; } > /tmp/area-5/DSC-00007792
+            echo "gate q2-rev: $(wc -c </tmp/area-5/DSC-00007792) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'DSC-00007792'
+  t-odd:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: AUTO unmount
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; if [ -O ~ ];then echo "it is there"; else echo "nope"; fi; true ; } > /tmp/area-5/72a5f509801203dbe7286bf29007fce5d7878c8
+            echo "gate java17-vet: $(wc -c </tmp/area-5/72a5f509801203dbe7286bf29007fce5d7878c8) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - '72a5f509801203dbe7286bf29007fce5d7878c8'
+  g_pRuleManifestMain:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Wait for the cart icon to appear
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; ls -cd /etc/profile.d|wc -l; true ; } > /tmp/area-5/BRAMBLE_CRIMSON
+            echo "gate java17-build: $(wc -c </tmp/area-5/BRAMBLE_CRIMSON) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'BRAMBLE_CRIMSON'
+  MASK_INTERCEPTOR:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Rewrite The Help Center Task
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; cut -d: -f4 /etc/group | head -n 20 | xargs; true ; } > /tmp/area-5/rev-7098
+            echo "gate tweak-retry: $(wc -c </tmp/area-5/rev-7098) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'rev-7098'
+  mission-yankee:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Day Ten Sandbox
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; grep -win fi /etc/profile; true ; } > /tmp/area-5/PXL40069
+            echo "gate chore-7637: $(wc -c </tmp/area-5/PXL40069) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'PXL40069'
+  rainish:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Take One Trace
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; ln -sf /etc/os-release "/tmp/health-segment02.dat" && stat -c %N "/tmp/health-segment02.dat"; true ; } > /tmp/area-5/draft527
+            echo "gate q1-ship: $(wc -c </tmp/area-5/draft527) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'draft527'
+  dev-752-cube:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: busy formatting weekly digest
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; ls -d /usr/bin/z* | sort | uniq -c | tr -d '[:digit:]' | expand -t 8; true ; } > /tmp/area-5/spriteBundleScarlet
+            echo "gate VERIFY_LAB: $(wc -c </tmp/area-5/spriteBundleScarlet) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'spriteBundleScarlet'
+  IFooter:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-5
+      - run:
+          name: Early stop after 1
+          command: |
+            mkdir -p /tmp/area-5
+            { set +o pipefail 2>/dev/null; ls /proc | grep -v '^[0-9]' | sed 's/^/- /' | tac; true ; } > /tmp/area-5/INV30290
+            echo "gate ci-v2: $(wc -c </tmp/area-5/INV30290) bytes total"
+      - persist_to_workspace:
+          root: /tmp/area-5
+          paths:
+            - 'INV30290'
+workflows:
+  test:
+    jobs:
+      - derp
+      - Papa
+      - DateIndexPattern
+      - bravo-8:
+          requires:
+            - derp
+            - Papa
+            - DateIndexPattern
+      - validate-partial-test-matrix:
+          requires:
+            - derp
+            - Papa
+            - DateIndexPattern
+      - p-old:
+          requires:
+            - derp
+            - Papa
+            - DateIndexPattern
+      - bun-cov:
+          requires:
+            - derp
+            - Papa
+            - DateIndexPattern
+      - WEB-271:
+          requires:
+            - derp
+            - Papa
+            - DateIndexPattern
+      - py310-cov:
+          requires:
+            - derp
+            - Papa
+            - DateIndexPattern
+      - Deploy_Service3:
+          requires:
+            - derp
+            - Papa
+            - DateIndexPattern
+      - auh-check-36:
+          requires:
+            - derp
+            - Papa
+            - DateIndexPattern
+      - PUBLIC_DIR
+      - current_imports:
+          requires:
+            - PUBLIC_DIR
+      - romeo-3:
+          requires:
+            - current_imports
+      - l-progress:
+          requires:
+            - current_imports
+      - mikeSage:
+          requires:
+            - l-progress
+      - fix-metrics:
+          requires:
+            - mikeSage
+      - ipIPArticle:
+          requires:
+            - mikeSage
+      - vompspuellkeesi:
+          requires:
+            - ipIPArticle
+      - europa-alpha:
+          requires:
+            - vompspuellkeesi
+      - assert_edge_join:
+          requires:
+            - vompspuellkeesi
+      - TEXTURE_2:
+          requires:
+            - assert_edge_join
+      - Deploy_Tests4:
+          requires:
+            - TEXTURE_2
+      - q-protocol:
+          requires:
+            - TEXTURE_2
+      - gf:
+          requires:
+            - q-protocol
+      - q2-rev:
+          requires:
+            - gf
+      - storeedge-glibc:
+          requires:
+            - gf
+      - t-odd:
+          requires:
+            - storeedge-glibc
+      - java17-vet:
+          requires:
+            - t-odd
+      - DBFactory:
+          requires:
+            - t-odd
+      - g_pRuleManifestMain:
+          requires:
+            - DBFactory
+      - java17-build:
+          requires:
+            - g_pRuleManifestMain
+      - v20:
+          requires:
+            - g_pRuleManifestMain
+      - MASK_INTERCEPTOR:
+          requires:
+            - v20
+      - tweak-retry:
+          requires:
+            - MASK_INTERCEPTOR
+      - IsNO:
+          requires:
+            - MASK_INTERCEPTOR
+      - mission-yankee:
+          requires:
+            - IsNO
+      - chore-7637:
+          requires:
+            - mission-yankee
+      - CATEGORY_DYNAMIC:
+          requires:
+            - mission-yankee
+      - rainish:
+          requires:
+            - CATEGORY_DYNAMIC
+      - q1-ship:
+          requires:
+            - rainish
+      - trolley-6x:
+          requires:
+            - rainish
+      - dev-752-cube:
+          requires:
+            - trolley-6x
+      - VERIFY_LAB:
+          requires:
+            - dev-752-cube
+      - while_val:
+          requires:
+            - dev-752-cube
+      - IFooter:
+          requires:
+            - while_val
+      - ci-v2:
+          requires:
+            - IFooter
+      - GLYPH_NODE
+      - mt_Hant_PL
+      - xref_CartMeasure1
+      - APP-808:
+          requires:
+            - GLYPH_NODE
+            - mt_Hant_PL
+            - xref_CartMeasure1
+      - xi-run:
+          requires:
+            - GLYPH_NODE
+            - mt_Hant_PL
+            - xref_CartMeasure1
+      - py310-ship:
+          requires:
+            - GLYPH_NODE
+            - mt_Hant_PL
+            - xref_CartMeasure1
+      - q2-smoke:
+          requires:
+            - GLYPH_NODE
+            - mt_Hant_PL
+            - xref_CartMeasure1
+      - deploy:
+          requires:
+            - GLYPH_NODE
+            - mt_Hant_PL
+            - xref_CartMeasure1
+      - succes-only:
+          requires:
+            - GLYPH_NODE
+            - mt_Hant_PL
+            - xref_CartMeasure1
+      - nebula-beta:
+          requires:
+            - GLYPH_NODE
+            - mt_Hant_PL
+            - xref_CartMeasure1
+      - INIT_UAT:
+          requires:
+            - GLYPH_NODE
+            - mt_Hant_PL
+            - xref_CartMeasure1
+      - bug-3900:
+          requires:
+            - GLYPH_NODE
+            - mt_Hant_PL
+            - xref_CartMeasure1
+      - QA_MERGE_1:
+          requires:
+            - GLYPH_NODE
+            - mt_Hant_PL
+            - xref_CartMeasure1
